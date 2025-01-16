@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./js/post.js" type="module"></script>
-    <title>Document</title>
+    <link href="./src/output.css" rel="stylesheet">
+    <title>FrontEnd Notes</title>
 </head>
-<body>
+
+<!-- https://tailwindcss.com/docs/flex -->
+
+<body class="bg-cyan-300">
+    <h1 class="text-3xl font-bold underline text-blue-950">
+        Hello world!
+    </h1>
     <form id="form">
         <label for="title">Title</label>
-        <input type="text" id="title">
+        <input type="text" id="title" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
 
         <label for="content">Content</label>
-        <input type="text" id="content">
+        <input type="text" id="content" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
 
         <label for="image">Image</label>
-        <input type="text" id="image">
+        <input type="text" id="image" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
 
         <label for="link">Link</label>
-        <input type="text" id="link">
+        <input type="text" id="link" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
 
-        <button id="submit-btn">Submit</button>
+        <button id="submit-btn" class="bg-sky-500/50">Submit</button>
     </form>
 </body>
 </html>
