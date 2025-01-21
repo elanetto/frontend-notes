@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch --env-file=.env server.js",
-    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "start": "concurrently \"npm run server\" \"npm run tailwind\"",
+    "server": "node server.js",
+    "tailwind": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +16,13 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "mysql2": "^3.12.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.10",
