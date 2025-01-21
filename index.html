@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./js/post.js" type="module"></script>
-    <link href="./src/output.css" rel="stylesheet">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+
+    <!-- link to js & css -->
+    <script src="/src/js/admin/post.js" type="module"></script>
+    <link href="/src/css/output.css" rel="stylesheet">
     <title>FrontEnd Notes</title>
 </head>
 
 <!-- https://tailwindcss.com/docs/flex -->
 
-<body class="bg-cyan-300">
-    <h1 class="text-3xl font-bold underline text-blue-950">
+<body class="bg-blue-950">
+    <h1 class="text-3xl font-bold underline text-white">
         Hello world!
     </h1>
-    <form id="form">
+    <form id="form" class="text-white">
         <label for="title">Title</label>
         <input type="text" id="title" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
 
