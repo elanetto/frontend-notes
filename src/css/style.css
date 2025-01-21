@@ -1,0 +1,47 @@
+.note-post {
+    min-width: 330px;
+    max-width: 330px;
+    height: auto;
+    background-color: black;
+    border-radius: 6px;
+    padding: 0.5rem;
+    margin: 1rem;
+}
+
+.notes-image {
+    object-fit: cover;
+    height: 250px;
+    width: 400px;
+}
+
+.note-post-content {
+    padding: 1rem;
+}
+
+.notes-image:hover {
+    filter: brightness(50%);
+}
+
+.notes-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e5ff99;
+}
+
+.notes-content-text {
+    font-weight: lighter;
+}
+
+/* Small (sm) */
+@media (max-width: 640px) {
+
+    .note-post {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .notes-image {
+        width: 100%;
+    }
+}

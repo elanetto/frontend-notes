@@ -1,6 +1,9 @@
 import express from "express";
 import cors from "cors";
 import mysql from 'mysql2/promise';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const port = process.env.PORT || 3000;
 console.log(port);
@@ -26,12 +29,20 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware
-app.use(express.json()); // To parse JSON requests
+app.use(express.json());
 
-app.get("/", async (req, res) => {
-    const [result, fields] = await connection.query("SELECT * FROM notes");
-    res.send(result);
+// app.get("/", async (req, res) => {
+//     const [result, fields] = await connection.query("SELECT * FROM notes");
+//     res.send(result);
+// });
+
+app.get("/notes", async (req, res) => {
+  const [result, fields] = await connection.query(`
+  SELECT notes.title, notes.content, notes.image, notes.link, 
+  user.name from notes
+  join user on notes.user_id = user.id;
+  `);
+  res.send(result);
 });
 
 app.post("/notes", async (req, res) => {
@@ -56,7 +67,8 @@ app.post("/notes", async (req, res) => {
     }
 });
   
-// Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+console.log(process.env.DB_HOST, process.env.DB_NAME);
