@@ -1,3 +1,26 @@
+
+.lekton-regular {
+    font-family: "Lekton", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.lekton-bold {
+    font-family: "Lekton", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.lekton-regular-italic {
+    font-family: "Lekton", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+h1, h2 {
+    font-family: "Lekton", serif;
+}
+  
 .note-post {
     min-width: 330px;
     max-width: 330px;
@@ -16,6 +39,10 @@
 
 .note-post-content {
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 30%;
 }
 
 .notes-image:hover {
@@ -30,6 +57,64 @@
 
 .notes-content-text {
     font-weight: lighter;
+}
+
+.avatar-image {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+}
+
+.avatar-name-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    align-self: flex-end;
+}
+
+.notes-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    align-self: flex-end;
+}
+
+.delete-btn, .edit-btn {
+    height: 1.2rem; /* Specify the height */
+    width: 1.2rem; /* Specify the width */
+    background-size: cover; /* Cover the entire area of the element */
+    cursor: pointer;
+    margin: 1rem;
+}
+
+.delete-btn {
+    background-image: url('/assets/svg/delete.svg'); /* Initial background image */
+}
+
+.delete-btn:hover {
+    background-image: url('/assets/svg/delete-hover.svg'); /* Change on hover */
+}
+
+.edit-btn {
+    background-image: url('/assets/svg/edit.svg'); /* Initial background image */
+}
+
+.edit-btn:hover {
+    background-image: url('/assets/svg/edit-hover.svg'); /* Change on hover */
+}
+
+.admin-card-buttons {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: end;
+    align-content: end;
+    align-self: flex-end;
 }
 
 /* Small (sm) */
