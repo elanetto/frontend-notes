@@ -93,19 +93,21 @@ h1, h2 {
 }
 
 .delete-btn {
-    background-image: url('/assets/svg/delete.svg'); /* Initial background image */
+    background-image: url('/assets/svg/delete.svg');
 }
 
 .delete-btn:hover {
-    background-image: url('/assets/svg/delete-hover.svg'); /* Change on hover */
+    background-image: url('/assets/svg/delete-hover.svg');
+    cursor: pointer;
 }
 
 .edit-btn {
-    background-image: url('/assets/svg/edit.svg'); /* Initial background image */
+    background-image: url('/assets/svg/edit.svg');
 }
 
 .edit-btn:hover {
-    background-image: url('/assets/svg/edit-hover.svg'); /* Change on hover */
+    background-image: url('/assets/svg/edit-hover.svg');
+    cursor: pointer;
 }
 
 .admin-card-buttons {
