@@ -39,7 +39,7 @@ app.use(express.json());
 app.get("/notes", async (req, res) => {
   const [result, fields] = await connection.query(`
   SELECT notes.title, notes.content, notes.image, notes.link, 
-  user.name from notes
+  user.name, user.avatar from notes
   join user on notes.user_id = user.id;
   `);
   res.send(result);

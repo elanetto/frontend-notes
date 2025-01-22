@@ -12,8 +12,9 @@ export default {
       colors: {
       },
       fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-        bebas: ["Bebas Neue", "sans-serif"],
+        // mono: ['ui-monospace', 'SFMono-Regular'],
+        // roboto: ["Roboto", "sans-serif"],
+        // bebas: ["Bebas Neue", "sans-serif"],
       },
     },
   },

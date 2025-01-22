@@ -26,6 +26,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                     <h2 class="font-bold text-white notes-title">${notes.title}</h2>
                     <p class="text-white notes-content-text">${notes.content}</p>
                 </div>
+                <div class="notes-bottom">
+                    <div class="avatar-name-card">
+                        <img src="${notes.avatar}" alt="Avatar of ${notes.name}" class="avatar-image" />
+                        <span class="text-white notes-author">${notes.name}</span>
+                    </div>
+                    <div class="admin-card-buttons">
+                        <div class="delete-btn"></div>
+                        <div class="edit-btn"></div>
+                    </div>
+                </div>
             </a>
             `;
 
