@@ -1,5 +1,5 @@
 export function logoutUser() {
-    localStorage.removeItem("token");  // Remove the token
-    alert("Logged out successfully!");
-    window.location.href = "index.html";  // Redirect to login page
+    console.log("Clearing all localStorage items and logging out...");
+    localStorage.clear();
+    window.location.href = "../../../index.html";
 }

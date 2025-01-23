@@ -1,33 +1,32 @@
-export async function loadProfile() {
-    try {
-        console.log("Stored token:", localStorage.getItem("token")); // Debugging the token
+import { API_ENDPOINTS } from "../api/apiConfig.js";
 
-        const res = await fetch("http://localhost:3000/profile", {
+export async function fetchUserProfile() {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        console.error("No token provided. User might not be logged in.");
+        alert("You are not logged in. Redirecting to login page.");
+        window.location.href = "../login.html";
+        return null;
+    }
+
+    try {
+        const response = await fetch(API_ENDPOINTS.PROFILE, {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
-                Authorization: localStorage.getItem("token"),
+                Authorization: `Bearer ${token}`,
             },
         });
 
-        if (!res.ok) {
-            throw new Error(`Failed to fetch profile: ${res.status}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch user profile");
         }
 
-        const data = await res.json();
-
-        // Log the data for debugging
-        console.log("Fetched profile data:", data);
-
-        // Display the raw response in the browser for debugging
-        const profileOutputElement = document.getElementById("profileOutput");
-        if (profileOutputElement) {
-            profileOutputElement.textContent = JSON.stringify(data, null, 2);
-        } else {
-            console.error("Element with id 'profileOutput' not found.");
-        }
+        const user = await response.json();
+        return user;
     } catch (error) {
-        console.error("Error loading profile:", error);
-        alert("Could not load profile. Please try again later.");
+        console.error("Error fetching user profile:", error);
+        alert("An error occurred while fetching your profile. Please try again.");
+        return null;
     }
 }
