@@ -1,11 +1,22 @@
 import { loginUser } from "./login.js";
 import { registerUser } from "./register.js";
 import { logoutUser } from "./logout.js";
-import { loadProfile } from "./profile.js";
+import { fetchUserProfile } from "./profile.js";
+import { updateProfileUI } from "./updateProfileUI.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-
-    loadProfile();
+    const profilePageContainer = document.getElementById("profilePage");
+    if (profilePageContainer) {
+        fetchUserProfile()
+            .then((user) => {
+                if (user) {
+                    updateProfileUI(user);
+                }
+            })
+            .catch((error) => {
+                console.error("Error updating the profile UI:", error);
+            });
+    }
 
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
@@ -13,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
-            
+
             await loginUser(email, password);
         });
     }
@@ -26,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = document.getElementById("registerEmail").value;
             const password = document.getElementById("registerPassword").value;
 
-            await registerUser(name, email, password); // Avatar removed
+            await registerUser(name, email, password);
         });
     }
 

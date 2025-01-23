@@ -33,11 +33,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.get("/", async (req, res) => {
-//     const [result, fields] = await connection.query("SELECT * FROM notes");
-//     res.send(result);
-// });
-
 app.get("/notes", async (req, res) => {
   const [result, fields] = await connection.query(`
   SELECT notes.title, notes.content, notes.image, notes.link, 
@@ -69,29 +64,53 @@ app.post("/notes", async (req, res) => {
     }
 });
 
-app.get("/user", async (req, res) => {
-  const { email } = req.query;  // Use query parameters
+app.get("/profile", authenticateToken, async (req, res) => {
+  const userId = req.user.id;
 
-  if (!email) {
-    return res.status(400).json({ error: "Email is required" });
-  }
-
-  const query = `SELECT * FROM user WHERE email = ?`;
-  
   try {
-    console.log("Executing query:", query, "with email:", email);  // Debugging
-    const [results] = await connection.query(query, [email]);
+    const [results] = await connection.query(
+      "SELECT name, email, avatar FROM user WHERE id = ?",
+      [userId]
+    );
 
     if (results.length === 0) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    res.status(200).json(results[0]);  // Return the first user found
+    res.status(200).json({
+      name: results[0].name,
+      email: results[0].email,
+      avatar: results[0].avatar,
+    });
   } catch (err) {
     console.error("Database error:", err.message);
-    return res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// app.get("/user", async (req, res) => {
+//   const { email } = req.query;  // Use query parameters
+
+//   if (!email) {
+//     return res.status(400).json({ error: "Email is required" });
+//   }
+
+//   const query = `SELECT * FROM user WHERE email = ?`;
+  
+//   try {
+//     console.log("Executing query:", query, "with email:", email);  // Debugging
+//     const [results] = await connection.query(query, [email]);
+
+//     if (results.length === 0) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     res.status(200).json(results[0]);  // Return the first user found
+//   } catch (err) {
+//     console.error("Database error:", err.message);
+//     return res.status(500).json({ error: err.message });
+//   }
+// });
 
 
 app.post('/login', async (req, res) => {
@@ -140,7 +159,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-
 app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -154,10 +172,10 @@ app.post('/register', async (req, res) => {
 
       // Define available avatars
       const avatars = [
-          "./assets/images/avatar/avatar-01.svg",
-          "./assets/images/avatar/avatar-02.svg",
-          "./assets/images/avatar/avatar-03.svg",
-          "./assets/images/avatar/avatar-04.svg"
+          "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-01.svg",
+          "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-02.svg",
+          "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-03.svg",
+          "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-04.svg"
       ];
 
       // Select a random avatar
@@ -177,8 +195,8 @@ app.post('/register', async (req, res) => {
 
 
 
-const authenticateToken = (req, res, next) => {
-  const token = req.headers['authorization'];
+function authenticateToken(req, res, next){
+  const token = req.headers['authorization'].split(" ")[1];
   
   if (!token) {
       return res.status(403).json({ error: "Access denied, token missing" });
@@ -206,7 +224,7 @@ app.get("/profile", authenticateToken, (req, res) => {
           if (results.length === 0) {
               return res.status(404).json({ error: "User not found" });
           }
-          console.log("Fetched user data:", results[0]); // Debugging
+          console.log("Fetched user data:", results[0]);
           res.json({ user: results[0] });
       }
   );
