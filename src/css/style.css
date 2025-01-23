@@ -42,7 +42,7 @@ h1, h2 {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    height: 30%;
+    height: 160px;
 }
 
 .notes-image:hover {
@@ -118,6 +118,12 @@ h1, h2 {
     align-content: end;
     align-self: flex-end;
 }
+
+input[type="text"], textarea[type="text"] {
+    border-radius: 4px;
+    padding: 0.5rem;
+    border: none;
+  }
 
 /* Small (sm) */
 @media (max-width: 640px) {

@@ -88,30 +88,6 @@ app.get("/profile", authenticateToken, async (req, res) => {
   }
 });
 
-// app.get("/user", async (req, res) => {
-//   const { email } = req.query;  // Use query parameters
-
-//   if (!email) {
-//     return res.status(400).json({ error: "Email is required" });
-//   }
-
-//   const query = `SELECT * FROM user WHERE email = ?`;
-  
-//   try {
-//     console.log("Executing query:", query, "with email:", email);  // Debugging
-//     const [results] = await connection.query(query, [email]);
-
-//     if (results.length === 0) {
-//       return res.status(404).json({ error: "User not found" });
-//     }
-
-//     res.status(200).json(results[0]);  // Return the first user found
-//   } catch (err) {
-//     console.error("Database error:", err.message);
-//     return res.status(500).json({ error: err.message });
-//   }
-// });
-
 
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
@@ -167,10 +143,8 @@ app.post('/register', async (req, res) => {
   }
 
   try {
-      // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Define available avatars
       const avatars = [
           "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-01.svg",
           "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-02.svg",
@@ -178,10 +152,8 @@ app.post('/register', async (req, res) => {
           "https://raw.githubusercontent.com/elanetto/frontend-notes/cafee02253905415b4e5f0b1730884f4b3d2b64c/assets/images/avatar/avatar-04.svg"
       ];
 
-      // Select a random avatar
       const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-      // Insert user into the database
       const query = "INSERT INTO user (name, email, password, avatar) VALUES (?, ?, ?, ?)";
       await connection.query(query, [name, email, hashedPassword, randomAvatar]);
 
@@ -191,8 +163,6 @@ app.post('/register', async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
 
 
 function authenticateToken(req, res, next){
@@ -230,7 +200,59 @@ app.get("/profile", authenticateToken, (req, res) => {
   );
 });
 
+// create a code that lets me edit a specific note
+app.put("/notes/:id", authenticateToken, (req, res) => {
+  const noteId = req.params.id;
+  const { title, content } = req.body;
 
+  // Check if title and content are provided
+  if (!title || !content) {
+    return res.status(400).json({ error: "Title and content are required" });
+  }
+
+  const userId = req.user.id;
+  const query = `UPDATE notes SET title = ?, content = ? WHERE id = ? AND user_id = ?`;
+  
+  connection.query(query, [title, content, noteId, userId], (error, results) => {
+    if (error) {
+      console.error("Database error:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+    
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
+    }
+
+    console.log("Updated note:", results);
+    res.json({ message: "Note updated successfully" });
+  });
+});
+
+
+// Endpoint to delete a specific note
+app.delete("/notes/:id", authenticateToken, (req, res) => {
+  const noteId = req.params.id; // Get the note ID from the request parameters
+  const userId = req.user.id; // Get the user ID from the authenticated user
+
+  // SQL query to delete the note
+  connection.query(
+    "DELETE FROM notes WHERE id = ? AND user_id = ?",
+    [noteId, userId],
+    (error, results) => {
+      if (error) {
+        console.error("Database error:", error);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ error: "Note not found or you do not have permission to delete this note" });
+      }
+
+      console.log("Deleted note ID:", noteId);
+      res.json({ message: "Note deleted successfully" });
+    }
+  );
+});
   
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
