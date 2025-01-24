@@ -59,11 +59,13 @@
             
             <h2 class="pt-4 text-3xl font-bold text-white">Register</h2>
             
-            <form id="registerForm">
+            <form id="registerForm" class="flex flex-col items-center p-4 space-y-4 mb-10">
                 <input type="text" id="registerName" placeholder="Enter your name" required />
-                <input type="email" id="registerEmail" placeholder="Enter your email" required />
-                <input type="password" id="registerPassword" placeholder="Enter your password" required />
-                <button type="submit">Register</button>
+                <input type="text" id="registerEmail" placeholder="Enter your email" required />
+                <input type="text" id="registerPassword" placeholder="Enter your password" required />
+                <button type="submit" class="px-4 w-32 py-2 bg-red-500 text-white font-bold rounded hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300">
+                    Register
+                </button>
             </form>
             
 

@@ -54,20 +54,29 @@
     <div class="h-40 w-auto bg-cover">
         <img class="h-40 w-full object-cover brightness-50" src="/assets/images/notes/notes-14.jpg" alt="">
     </div>
+
     <main class="w-full max-w-6xl mx-auto px-4 flex-grow">
         <div class="flex justify-center flex-col items-center p-4">
             
-            <h2 class="pt-4 text-3xl font-bold text-white">Account page</h2>
+            <h2 class="pt-4 text-3xl font-bold text-white">Hello, <span id="profileName"></span>!</h2>
 
-            <div id="profileName"></div>
+            <div id="logged-in-user-information" class="flex container w-full mt-10">
+                <div class="w-full flex flex-col items-center">
+                    <img src="/assets/images/avatar/avatar-01.svg" id="profileAvatar" 
+                    alt="User Avatar" class="rounded-full w-52 h-52">
+                    <p class="text-white font-bold mt-5">Email: <span id="profileEmail"></span></p>
 
-            <img src="/assets/images/avatar/avatar-01.svg" id="profileAvatar" 
-            alt="User Avatar" class="rounded">
-
-            <button id="logoutBtn">Logout</button>
-
-            <a href="/post/create/">Create a new note</a>
-
+                    <button id="logoutBtn" class="px-4 mt-6 mb-8 w-32 py-2 bg-blue-700 text-white font-bold rounded hover:bg-red-950 focus:outline-none focus:ring focus:ring-red-300">
+                        Logout
+                    </button>
+                </div>
+                <div class="w-full flex items-center justify-center">
+                    <a href="/post/create/" class="px-4 mt-6 text-center mb-8 w-56 py-2 bg-pink-500 text-white font-bold rounded hover:bg-red-950 focus:outline-none focus:ring focus:ring-red-300">Create a new note</a>
+                </div>
+            </div>
+            <div id="logged-in-users-notes">
+                <!-- Add notes here  -->
+            </div>
         </div>
     </main>
     <footer class="font-extralight flex flex-col content-center items-center p-20 bg-gray-950 text-white text-center justify-center">
