@@ -17,8 +17,8 @@
 
     <!-- link to js & css -->
     <script src="/src/js/admin/post.js" type="module"></script>
-    <link href="/src/css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/style.css">
+    <link href="/src/css/output.css" rel="stylesheet">
     <title>FrontEnd Notes</title>
 </head>
 
@@ -52,26 +52,46 @@
 
     <main class="w-full max-w-6xl mx-auto px-4 flex-grow">
         <!-- her er vidden på formen: max-w-xs -->
-        <div class="flex flex-col mx-auto max-w-xs p-4">
+        <div class="flex flex-col items-center mx-auto max-w-lg p-4">
             <h1 class="text-white text-3xl font-bold">Create a new post</h1>
             <div class="w-full">
-                <form id="form" class="text-black flex flex-col field-sizing-content md:field-sizing-fixed">
-                    <label for="title" class="text-white">Title</label>
-                    <input type="text" id="title" placeholder="Title: Often the date" class="border-none rounded p-2"> 
-                    <!-- Why wont the corners of the input field get rounded? -->
-            
-                    <label for="content" class="text-white">Content</label>
-                    <textarea type="text" id="content" class="">Describe the main gist of the notes
-                    </textarea>
-    
-                    <label for="image" class="text-white">Image</label>
-                    <input type="text" placeholder="paste URL of a relevant image" id="image" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
-            
-                    <label for="link" class="text-white">Link</label>
-                    <input type="text" placeholder="Paste the published Notion link here" id="link" class="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500">
-            
-                    <button id="submit-btn" class="bg-sky-500/50">Submit</button>
-                </form>
+
+                <form id="form" class="flex flex-col items-center p-4 space-y-8 mb-10 w-full max-w-2xl">
+                    <input 
+                        type="text" 
+                        id="title" 
+                        placeholder="Title: Often the date" 
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    > 
+                
+                    <textarea 
+                        id="content" 
+                        placeholder="Describe the main gist of the notes" 
+                        class="w-full h-32 border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    ></textarea>
+                
+                    <input 
+                        type="text" 
+                        id="image" 
+                        placeholder="Paste URL of a relevant image" 
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                
+                    <input 
+                        type="text" 
+                        id="link" 
+                        placeholder="Paste the published Notion link here" 
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                
+                    <button 
+                        id="submit-btn" 
+                        class="px-4 mb-8 w-full py-2 bg-blue-700 text-white font-bold rounded hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                        Submit
+                    </button>
+                </form>                
+                
             </div>
         </div>
     </main>
