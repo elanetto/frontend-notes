@@ -35,9 +35,16 @@ app.use((req, res, next) => {
 
 app.get("/notes", async (req, res) => {
   const [result, fields] = await connection.query(`
-  SELECT notes.title, notes.content, notes.image, notes.link, 
-  user.name, user.avatar from notes
-  join user on notes.user_id = user.id;
+    SELECT 
+      notes.id,
+      notes.title, 
+      notes.content, 
+      notes.image, 
+      notes.link, 
+      user.name, 
+      user.avatar 
+    FROM notes
+    JOIN user ON notes.user_id = user.id;
   `);
   res.send(result);
 });
@@ -62,6 +69,38 @@ app.post("/notes", async (req, res) => {
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
+});
+
+app.get("/notes/:id", async (req, res) => {
+  const noteId = req.params.id;
+
+  try {
+      const [result] = await connection.query(
+          `
+          SELECT 
+              notes.id, 
+              notes.title, 
+              notes.content, 
+              notes.image, 
+              notes.link, 
+              user.name, 
+              user.avatar 
+          FROM notes 
+          JOIN user ON notes.user_id = user.id 
+          WHERE notes.id = ?;
+          `,
+          [noteId]
+      );
+
+      if (result.length === 0) {
+          return res.status(404).json({ error: "Note not found" });
+      }
+
+      res.json(result[0]); // Return the first (and only) result
+  } catch (err) {
+      console.error("Database error:", err.message);
+      res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.get("/profile", authenticateToken, async (req, res) => {
@@ -200,31 +239,31 @@ app.get("/profile", authenticateToken, (req, res) => {
   );
 });
 
-// create a code that lets me edit a specific note
 app.put("/notes/:id", authenticateToken, (req, res) => {
   const noteId = req.params.id;
   const { title, content } = req.body;
 
   // Check if title and content are provided
   if (!title || !content) {
-    return res.status(400).json({ error: "Title and content are required" });
+      return res.status(400).json({ error: "Title and content are required" });
   }
 
   const userId = req.user.id;
   const query = `UPDATE notes SET title = ?, content = ? WHERE id = ? AND user_id = ?`;
   
   connection.query(query, [title, content, noteId, userId], (error, results) => {
-    if (error) {
-      console.error("Database error:", error);
-      return res.status(500).json({ error: "Internal server error" });
-    }
-    
-    if (results.affectedRows === 0) {
-      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
-    }
+      if (error) {
+          console.error("Database error:", error);
+          return res.status(500).json({ error: "Internal server error" });
+      }
+      
+      if (results.affectedRows === 0) {
+          return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
+      }
 
-    console.log("Updated note:", results);
-    res.json({ message: "Note updated successfully" });
+      console.log("Updated note:", results);
+      // Send an explicit 200 status code for success
+      res.status(200).json({ message: "Note updated successfully" });
   });
 });
 

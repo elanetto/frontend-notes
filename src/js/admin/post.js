@@ -1,3 +1,5 @@
+import { API_ENDPOINTS } from "../api/apiConfig.js";
+
 document.querySelector('form').addEventListener("submit", async (e) => {
     e.preventDefault();
     const title = document.querySelector('#title').value;
@@ -12,7 +14,7 @@ document.querySelector('form').addEventListener("submit", async (e) => {
         link: link,
     };
 
-    const res = await fetch('http://localhost:3000/notes', {
+    const res = await fetch(API_ENDPOINTS.NOTES, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -22,5 +24,4 @@ document.querySelector('form').addEventListener("submit", async (e) => {
     
     const data = await res.json();
     console.log(data);
-    console.log("Your post has been created! Check it out here: http://localhost:3000/notes");
 });
