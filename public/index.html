@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- link to js & css -->
+    <script src="/src/js/view/notes.js" type="module"></script>
+    <link href="/src/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="/src/css/style.css">
+    <title>FrontEnd Notes</title>
+</head>
+
+<!-- https://tailwindcss.com/docs/flex -->
+
+<body class="bg-gray-800 min-h-screen max-h-screen flex flex-col justify-between">
+    
+    <header class="bg-gray-950">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center py-4 px-8 md:px-12 lg:px-24">
+            <a href="#">
+                <div class="h-20 flex items-center">
+                    <img src="/assets/favicon_io/android-chrome-192x192.png" 
+                    alt="logo for notes site: It looks like a pencil writing notes on paper" 
+                    class="max-h-10 max-w-xs m-4">
+                    <h1 class="text-3xl font-bold text-white font-amatic">FrontEnd Notes</h1>
+                </div>
+            </a>
+            <nav class="flex items-center">
+                <ul class="flex items-center">
+                    <li class="mr-4">
+                        <a href="/account/login/" class="text-white hover:text-gray-400">
+                            Login
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="h-40 w-auto bg-cover">
+        <img class="h-40 w-full object-cover brightness-50" src="/assets/images/notes/notes-14.jpg" alt="">
+    </div>
+    <main class="w-full max-w-6xl mx-auto px-4 flex-grow">
+        <div class="flex justify-center flex-col items-center p-4">
+            <h2 class="pt-4 text-3xl font-bold text-white">Class Notion Notes</h2>
+            <div id="notes-box" class="flex flex-wrap justify-center mx-auto max-w-7xl">
+                <!-- notes will be displayed here -->
+
+            </div>
+        </div>
+    </main>
+    <footer class="font-extralight flex flex-col content-center items-center p-20 bg-gray-950 text-white text-center justify-center">
+        <p class="p-2">Notes from class written and shared in Notion by Anette</p>
+        <p class="italic p-2">Anette &copy; 2025</p>
+        <p class="p-2">This page is made by students for students at Noroff</p>
+    </footer>
+</body>
+</html>
