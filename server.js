@@ -122,6 +122,40 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/register", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const query = `
+      INSERT INTO user (name, email, password)
+      VALUES (?, ?, ?);
+    `;
+
+    const [results] = await connection.query(query, [name, email, hashedPassword]);
+
+    res.status(201).json({
+      message: "User registered successfully",
+      user: {
+        id: results.insertId,
+        name: name,
+        email: email,
+      },
+    });
+  } catch (err) {
+    if (err.code === "ER_DUP_ENTRY") {
+      return res.status(400).json({ error: "Email already in use" });
+    }
+    console.error("Error registering user:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.get("/notes", async (req, res) => {
   const [result] = await connection.query(`
     SELECT 
