@@ -175,7 +175,7 @@ Response:
 Response:
 ```bash
 {
-  "name": "John Doe",
+  "name": "Donald Duck",
   "email": "user@example.com",
   "avatar": "https://example.com/avatar.png"
 }
@@ -317,3 +317,13 @@ Include the token in the Authorization header:
 ```bash
 Authorization: Bearer <jwt-token>
 ```
+
+---
+
+## Licence
+This poroject is made with an MIT licence.
+
+---
+
+## Made by
+This project is made by [Anette Therese Lindberg](https://github.com/elanetto) <-- visit my GitHub profile.
