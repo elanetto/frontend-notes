@@ -130,11 +130,11 @@ export const API_ENDPOINTS = {
 ## Endpoints
 ### 1. User Authentication
 
-Login (login with excisting user)
+### Login
 - Endpoint: /login
 - Method: POST
 - Headers: Content-Type: application/json
-- Request Body:
+Request Body:
 ```bash
 {
   "email": "user@example.com",
@@ -156,7 +156,8 @@ Response:
 }
 ```
 
-Profile (Fetch and read information about excisitng user)
+### Profile 
+(Fetch and read information about excisitng user)
 - Endpoint: /profile
 - Method: GET
 - Headers:
@@ -172,7 +173,7 @@ Response:
 }
 ```
 
-Register
+### Register
 - Endpoint: POST /register
 
 Request Body:
@@ -186,7 +187,7 @@ Request Body:
 
 ### 2. Notes
 
-Get All Notes
+### Get All Notes
 - Endpoint: /notes
 - Method: GET
 
@@ -206,7 +207,7 @@ Response:
 ```
 PS: 'image' here refers to the image saved to the note. Name and avatar refers to the user who made the note.
 
-Get a Note by ID
+### Get a Note by ID
 - Endpoint: /notes/:id
 - Method: GET
 
@@ -223,7 +224,7 @@ Response:
 }
 ```
 
-Create a New Note
+### Create a New Note
 - Endpoint: /notes
 - Method: POST
 - Headers:
@@ -254,7 +255,7 @@ Response:
 }
 ```
 
-Update a Note
+### Update a Note
 - Endpoint: /notes/:id
 - Method: PUT
 - Headers:
@@ -271,7 +272,7 @@ Request Body:
 }
 ```
 
-Delete a Note
+### Delete a Note
 - Endpoint: /notes/:id
 - Method: DELETE
 - Headers:
