@@ -97,3 +97,161 @@ This project is deployed as a Web Service and a PostgreSQL (converting mySQL int
 
 ---
 
+# API Documentation
+### Base URL
+- For local development: http://localhost:3000
+- For deployment: Replace the base URL with your deployed backend URL
+
+## Endpoints
+### 1. User Authentication
+
+Login (login with excisting user)
+- Endpoint: /login
+- Method: POST
+- Headers: Content-Type: application/json
+- Request Body:
+```bash
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+Response:
+```bash
+{
+  "message": "Login successful",
+  "token": "jwt-token-goes-here",
+  "user": {
+    "id": 1,
+    "name": "Donald Duck",
+    "email": "user@example.com",
+    "avatar": "https://example.com/avatar.png"
+  }
+}
+```
+
+Profile (Fetch and read information about excisitng user)
+- Endpoint: /profile
+- Method: GET
+- Headers:
+- Content-Type: application/json
+- Authorization: Bearer <jwt-token>
+
+Response:
+```bash
+{
+  "name": "John Doe",
+  "email": "user@example.com",
+  "avatar": "https://example.com/avatar.png"
+}
+```
+
+### 2. Notes
+
+Get All Notes
+- Endpoint: /notes
+- Method: GET
+
+Response:
+```bash
+[
+  {
+    "id": 1,
+    "title": "First Note",
+    "content": "This is the content of the note.",
+    "image": "https://example.com/note-image.jpg",
+    "link": "https://notion.so/example",
+    "name": "Donald Duck",
+    "avatar": "https://example.com/avatar.png"
+  }
+]
+```
+PS: 'image' here refers to the image saved to the note. Name and avatar refers to the user who made the note.
+
+Get a Note by ID
+- Endpoint: /notes/:id
+- Method: GET
+
+Response:
+```bash
+{
+  "id": 1,
+  "title": "First Note",
+  "content": "This is the content of the note.",
+  "image": "https://example.com/note-image.jpg",
+  "link": "https://notion.so/example",
+  "name": "Donald Duck",
+  "avatar": "https://example.com/avatar.png"
+}
+```
+
+Create a New Note
+- Endpoint: /notes
+- Method: POST
+- Headers:
+      - Content-Type: application/json
+      - Authorization: Bearer <jwt-token>
+
+Request Body:
+```bash
+{
+  "title": "New Note",
+  "content": "This is the content of the new note.",
+  "image": "https://example.com/new-note-image.jpg",
+  "link": "https://notion.so/new-note",
+  "user_id": 1
+}
+```
+
+Response:
+```bash
+
+{
+  "id": 2,
+  "title": "New Note",
+  "content": "This is the content of the new note.",
+  "image": "https://example.com/new-note-image.jpg",
+  "link": "https://notion.so/new-note",
+  "user_id": 1
+}
+```
+
+Update a Note
+- Endpoint: /notes/:id
+- Method: PUT
+- Headers:
+- Content-Type: application/json
+- Authorization: Bearer <jwt-token>
+
+Request Body:
+```bash
+{
+  "title": "Updated Note",
+  "content": "This is the updated content.",
+  "image": "https://example.com/updated-note-image.jpg",
+  "link": "https://notion.so/updated-note"
+}
+```
+
+Delete a Note
+- Endpoint: /notes/:id
+- Method: DELETE
+- Headers:
+      - Content-Type: application/json
+      - Authorization: Bearer <jwt-token>
+
+Response:
+- Success (200):
+```bash
+{
+  "message": "Note deleted successfully"
+}
+```
+
+- Error (404):
+```bash
+{
+  "error": "Note not found or you do not have permission to delete this note"
+}
+```
