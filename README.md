@@ -4,6 +4,8 @@ Visit the deployed site [here](https://frontend-notes-ecn4.onrender.com/)
 
 A full-stack project built with Node.js, Express, MySQL, and Tailwind CSS to manage and display notes.
 
+Personal goal with this project: To create a site where I can share my Notion class notes with my class.
+
 ## Features
 - User authentication (login, register)
 - Create, read, update, and delete notes
