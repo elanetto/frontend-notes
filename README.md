@@ -172,6 +172,18 @@ Response:
 }
 ```
 
+Register
+- Endpoint: POST /register
+
+Request Body:
+```bash
+{
+  "name": "Donald Duck",
+  "email": "john@example.com",
+  "password": "password123"
+}
+```
+
 ### 2. Notes
 
 Get All Notes
