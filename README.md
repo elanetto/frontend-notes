@@ -1,4 +1,6 @@
 # Frontend Notes
+[![Frontend Notes Preview](https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/readme/preview-frontendnotes.png)](https://frontend-notes-ecn4.onrender.com/)
+Visit the deployed site [here](https://frontend-notes-ecn4.onrender.com/)
 
 A full-stack project built with Node.js, Express, MySQL, and Tailwind CSS to manage and display notes.
 
@@ -45,6 +47,10 @@ npm install
 ```bash
 CREATE DATABASE frontend_notes;
   ```
+
+I used www.domeneshop.no to build my tables in mySQL:
+
+![domeneshop](https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/readme/mySQL.png)
 
 2. Create Required Tables:
 - Import the schema.sql file provided in the project to create the necessary tables.
@@ -271,6 +277,11 @@ Request Body:
   "link": "https://notion.so/updated-note"
 }
 ```
+
+Example of the PUT /notes/:id endpoint in use:
+
+![Edit note](https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/readme/edit-post.png)
+
 
 ### Delete a Note
 - Endpoint: /notes/:id
