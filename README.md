@@ -309,7 +309,9 @@ Response:
 
 ## Authentication
 All protected routes (e.g., /profile, /notes, /notes/:id for POST, PUT, DELETE) require a valid JWT token.
+
 Include the token in the Authorization header:
+
 ```bash
 Authorization: Bearer <jwt-token>
 ```
