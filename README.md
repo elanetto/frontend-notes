@@ -97,6 +97,31 @@ This project is deployed as a Web Service and a PostgreSQL (converting mySQL int
 
 ---
 
+# API
+The API for this project is created through mySQL database tables that have been converted into API through Render.
+While working on this project on the computer, I have simply used a connection to mySQL database through an .env file and my server.js file.
+
+The URL I've been working with locally is therefore:
+```bash
+http://localhost:3000
+```
+
+Using the file apiConfig.js, I have been switching between localhost and Render.coms API url:
+```bash
+const API_BASE_URL = "http://localhost:3000";
+
+export const API_ENDPOINTS = {
+  LOGIN: `${API_BASE_URL}/login`,
+  REGISTER: `${API_BASE_URL}/register`,
+  PROFILE: `${API_BASE_URL}/profile`,
+  NOTES: `${API_BASE_URL}/notes`,
+  USERS: `${API_BASE_URL}/users`,
+  USER_BY_EMAIL: (email) => `${API_BASE_URL}/user?email=${email}`,
+};
+```
+
+---
+
 # API Documentation
 ### Base URL
 - For local development: http://localhost:3000
