@@ -118,6 +118,36 @@ app.get("/notes/:id", async (req, res) => {
   }
 });
 
+app.put("/notes/:id", authenticateToken, async (req, res) => {
+  const noteId = req.params.id;
+  const { title, content, image, link } = req.body;
+
+  // Check for missing required fields
+  if (!title || !content || !image || !link) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const userId = req.user.id; // Ensure the authenticated user owns the post
+    const query = `
+      UPDATE notes
+      SET title = ?, content = ?, image = ?, link = ?
+      WHERE id = ? AND user_id = ?;
+    `;
+
+    const [result] = await connection.query(query, [title, content, image, link, noteId, userId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
+    }
+
+    res.status(200).json({ message: "Note updated successfully" });
+  } catch (err) {
+    console.error("Error updating note:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // JWT authentication middleware
 function authenticateToken(req, res, next) {
   const token = req.headers["authorization"]?.split(" ")[1];
