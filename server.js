@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 import path from "path";
 import { fileURLToPath } from "url";
 
-// Load environment variables
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,22 +14,17 @@ const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 3000;
 
-// Initialize the Express app
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 
-// Fallback route to serve index.html for the root path
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Initialize MySQL connection
 const connection = await mysql.createConnection({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
@@ -39,7 +33,6 @@ const connection = await mysql.createConnection({
   port: process.env.DB_PORT,
 });
 
-// Logging middleware
 let count = 0;
 app.use((req, res, next) => {
   count++;
@@ -47,108 +40,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Endpoints
-app.get("/notes", async (req, res) => {
-  const [result] = await connection.query(`
-    SELECT 
-      notes.id,
-      notes.title, 
-      notes.content, 
-      notes.image, 
-      notes.link, 
-      user.name, 
-      user.avatar 
-    FROM notes
-    JOIN user ON notes.user_id = user.id;
-  `);
-  res.send(result);
-});
-
-app.post("/notes", async (req, res) => {
-  const { title, content, image, link } = req.body;
-
-  if (!title || !content || !image || !link) {
-    return res.status(400).json({ error: "Missing required fields" });
-  }
-
-  const query = "INSERT INTO notes (title, content, image, link) VALUES (?, ?, ?, ?)";
-  try {
-    const [results] = await connection.query(query, [title, content, image, link]);
-    res.status(201).json({
-      id: results.insertId,
-      title,
-      content,
-      image,
-      link,
-    });
-  } catch (err) {
-    return res.status(500).json({ error: err.message });
-  }
-});
-
-app.get("/notes/:id", async (req, res) => {
-  const noteId = req.params.id;
-
-  try {
-    const [result] = await connection.query(
-      `
-      SELECT 
-          notes.id, 
-          notes.title, 
-          notes.content, 
-          notes.image, 
-          notes.link, 
-          user.name, 
-          user.avatar 
-      FROM notes 
-      JOIN user ON notes.user_id = user.id 
-      WHERE notes.id = ?;
-      `,
-      [noteId]
-    );
-
-    if (result.length === 0) {
-      return res.status(404).json({ error: "Note not found" });
-    }
-
-    res.json(result[0]);
-  } catch (err) {
-    console.error("Database error:", err.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-app.put("/notes/:id", authenticateToken, async (req, res) => {
-  const noteId = req.params.id;
-  const { title, content, image, link } = req.body;
-
-  // Check for missing required fields
-  if (!title || !content || !image || !link) {
-    return res.status(400).json({ error: "Missing required fields" });
-  }
-
-  try {
-    const userId = req.user.id; // Ensure the authenticated user owns the post
-    const query = `
-      UPDATE notes
-      SET title = ?, content = ?, image = ?, link = ?
-      WHERE id = ? AND user_id = ?;
-    `;
-
-    const [result] = await connection.query(query, [title, content, image, link, noteId, userId]);
-
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
-    }
-
-    res.status(200).json({ message: "Note updated successfully" });
-  } catch (err) {
-    console.error("Error updating note:", err.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// JWT authentication middleware
 function authenticateToken(req, res, next) {
   const token = req.headers["authorization"]?.split(" ")[1];
 
@@ -164,7 +55,6 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// Example protected route
 app.get("/profile", authenticateToken, async (req, res) => {
   const userId = req.user.id;
 
@@ -189,7 +79,6 @@ app.get("/profile", authenticateToken, async (req, res) => {
   }
 });
 
-// Login route
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -233,7 +122,134 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Start the server
+app.get("/notes", async (req, res) => {
+  const [result] = await connection.query(`
+    SELECT 
+      notes.id,
+      notes.title, 
+      notes.content, 
+      notes.image, 
+      notes.link, 
+      user.name, 
+      user.avatar 
+    FROM notes
+    JOIN user ON notes.user_id = user.id;
+  `);
+  res.send(result);
+});
+
+app.post("/notes", authenticateToken, async (req, res) => {
+  const { title, content, image, link, user_id } = req.body;
+
+  console.log("Request body on server:", { title, content, image, link, user_id });
+
+  if (!title || !content || !image || !link || !user_id) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const query = `
+      INSERT INTO notes (title, content, image, link, user_id)
+      VALUES (?, ?, ?, ?, ?);
+    `;
+
+    const [results] = await connection.query(query, [title, content, image, link, user_id]);
+
+    res.status(201).json({
+      id: results.insertId,
+      title,
+      content,
+      image,
+      link,
+      user_id,
+    });
+  } catch (err) {
+    console.error("Error creating post:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+app.get("/notes/:id", async (req, res) => {
+  const noteId = req.params.id;
+
+  try {
+    const [result] = await connection.query(
+      `
+      SELECT 
+          notes.id, 
+          notes.title, 
+          notes.content, 
+          notes.image, 
+          notes.link, 
+          user.name, 
+          user.avatar 
+      FROM notes 
+      JOIN user ON notes.user_id = user.id 
+      WHERE notes.id = ?;
+      `,
+      [noteId]
+    );
+
+    if (result.length === 0) {
+      return res.status(404).json({ error: "Note not found" });
+    }
+
+    res.json(result[0]);
+  } catch (err) {
+    console.error("Database error:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.put("/notes/:id", authenticateToken, async (req, res) => {
+  const noteId = req.params.id;
+  const { title, content, image, link } = req.body;
+
+  if (!title || !content || !image || !link) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+
+  try {
+    const userId = req.user.id;
+    const query = `
+      UPDATE notes
+      SET title = ?, content = ?, image = ?, link = ?
+      WHERE id = ? AND user_id = ?;
+    `;
+
+    const [result] = await connection.query(query, [title, content, image, link, noteId, userId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
+    }
+
+    res.status(200).json({ message: "Note updated successfully" });
+  } catch (err) {
+    console.error("Error updating note:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.delete("/notes/:id", authenticateToken, async (req, res) => {
+  const noteId = req.params.id;
+  const userId = req.user.id;
+
+  try {
+    const query = "DELETE FROM notes WHERE id = ? AND user_id = ?";
+    const [result] = await connection.query(query, [noteId, userId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Note not found or you do not have permission to delete this note" });
+    }
+
+    res.status(200).json({ message: "Note deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting note:", err.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
