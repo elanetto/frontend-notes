@@ -136,7 +136,7 @@ export const API_ENDPOINTS = {
 - For deployment: Replace the base URL with your deployed backend URL
 
 ## Endpoints
-### 1. User Authentication
+## 1. User Authentication
 
 ### Login
 - Endpoint: /login
@@ -193,7 +193,7 @@ Request Body:
 }
 ```
 
-### 2. Notes
+## 2. Notes
 
 ### Get All Notes
 - Endpoint: /notes
