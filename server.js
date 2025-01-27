@@ -33,6 +33,16 @@ const connection = await mysql.createConnection({
   port: process.env.DB_PORT,
 });
 
+// Keep-alive mechanism to prevent idle connection timeouts
+setInterval(async () => {
+  try {
+    const [result] = await connection.query("SELECT 1");
+    console.log("Keep-alive query executed successfully.");
+  } catch (err) {
+    console.error("Keep-alive query failed:", err.message);
+  }
+}, 120000); // Executes every 2 minutes
+
 let count = 0;
 app.use((req, res, next) => {
   count++;
@@ -202,7 +212,6 @@ app.post("/notes", authenticateToken, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 app.get("/notes/:id", async (req, res) => {
   const noteId = req.params.id;
