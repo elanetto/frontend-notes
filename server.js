@@ -20,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -166,38 +167,77 @@ app.post("/register", async (req, res) => {
   }
 });
 
+// app.get("/notes", async (req, res) => {
+//   const [result] = await connection.query(`
+//     SELECT 
+//       notes.id,
+//       notes.title, 
+//       notes.content, 
+//       notes.image, 
+//       notes.link, 
+//       notes.subject,
+//       notes.date,
+//       user.name, 
+//       user.avatar
+//     FROM notes
+//     JOIN user ON notes.user_id = user.id;
+//   `);
+//   res.send(result);
+// });
+
 app.get("/notes", async (req, res) => {
-  const [result] = await connection.query(`
-    SELECT 
-      notes.id,
-      notes.title, 
-      notes.content, 
-      notes.image, 
-      notes.link, 
-      user.name, 
-      user.avatar 
-    FROM notes
-    JOIN user ON notes.user_id = user.id;
-  `);
-  res.send(result);
+  try {
+    const { sort } = req.query; // Read the 'sort' query parameter
+
+    let orderBy = "date DESC"; // Default sorting: Newest first
+
+    if (sort === "asc") {
+      orderBy = "date ASC"; // Oldest first if 'asc' is provided
+    }
+
+    // Query the database with sorting
+    const query = `
+      SELECT 
+        notes.id,
+        notes.title, 
+        notes.content, 
+        notes.image, 
+        notes.link, 
+        notes.subject,
+        notes.date,
+        user.name, 
+        user.avatar
+      FROM notes
+      JOIN user ON notes.user_id = user.id
+      ORDER BY ${orderBy};
+    `;
+
+    const [notes] = await connection.query(query);
+
+    res.json(notes);
+  } catch (error) {
+    console.error("Error fetching notes:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
+
 app.post("/notes", authenticateToken, async (req, res) => {
-  const { title, content, image, link, user_id } = req.body;
+  const { title, content, image, link, user_id, subject } = req.body;
 
-  console.log("Request body on server:", { title, content, image, link, user_id });
+  console.log("Request body on server:", { title, content, image, link, user_id, subject, date });
 
-  if (!title || !content || !image || !link || !user_id) {
+  if (!title || !content || !image || !link || !user_id || !subject) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
   try {
     const query = `
-      INSERT INTO notes (title, content, image, link, user_id)
-      VALUES (?, ?, ?, ?, ?);
+      INSERT INTO notes (title, content, image, link, user_id, subject)
+      VALUES (?, ?, ?, ?, ?, ?);
     `;
 
-    const [results] = await connection.query(query, [title, content, image, link, user_id]);
+    const [results] = await connection.query(query, [title, content, image, link, user_id, subject, date]);
 
     res.status(201).json({
       id: results.insertId,
@@ -206,7 +246,9 @@ app.post("/notes", authenticateToken, async (req, res) => {
       image,
       link,
       user_id,
-    });
+      subject,
+      date: new Date().toISOString(),
+    });    
   } catch (err) {
     console.error("Error creating post:", err.message);
     res.status(500).json({ error: "Internal server error" });
@@ -225,6 +267,8 @@ app.get("/notes/:id", async (req, res) => {
           notes.content, 
           notes.image, 
           notes.link, 
+          notes.subject,
+          notes.date,
           user.name, 
           user.avatar 
       FROM notes 
@@ -247,9 +291,9 @@ app.get("/notes/:id", async (req, res) => {
 
 app.put("/notes/:id", authenticateToken, async (req, res) => {
   const noteId = req.params.id;
-  const { title, content, image, link } = req.body;
+  const { title, content, image, link, subject, date } = req.body;
 
-  if (!title || !content || !image || !link) {
+  if (!title || !content || !image || !link || !subject || !date) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -257,7 +301,7 @@ app.put("/notes/:id", authenticateToken, async (req, res) => {
     const userId = req.user.id;
     const query = `
       UPDATE notes
-      SET title = ?, content = ?, image = ?, link = ?
+      SET title = ?, content = ?, image = ?, link = ?, subject = ?, date = ?
       WHERE id = ? AND user_id = ?;
     `;
 
