@@ -2,9 +2,11 @@
 export default {
   content: [
     "./index.html",
-    "./account/*/*.html",
-    "./post/*/*.html",
+    "./account/**/*.html",
+    "./post/**/*.html",
     "./src/**/*.js",
+    "./src/**/*.js",
+    "./src/**/*.css"
   ],  
   theme: {
     extend: {

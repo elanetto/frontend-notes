@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lekton:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- link to js & css -->
+    <script src="/src/js/admin/editPost.js" type="module"></script>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <link href="/src/css/output.css" rel="stylesheet">
+    <title>FrontEnd Notes</title>
+</head>
+
+<!-- https://tailwindcss.com/docs/flex -->
+
+<body class="bg-gray-800 min-h-screen max-h-screen flex flex-col justify-between">
+    <header class="bg-gray-950">
+        <div class="max-w-screen-xl mx-auto flex justify-between items-center py-4 px-8 md:px-12 lg:px-24">
+            <a href="../../">
+                <div class="h-20 flex items-center">
+                    <img src="/assets/favicon_io/android-chrome-192x192.png" 
+                    alt="logo for notes site: It looks like a pencil writing notes on paper" 
+                    class="max-h-10 max-w-xs m-4">
+                    <h1 class="text-3xl font-bold text-white font-amatic">FrontEnd Notes</h1>
+                </div>
+            </a>
+        <nav class="flex justify-between items-center p-4">
+            <ul class="flex justify-between items-center p-4">
+                <li class="mr-4">
+                    <a href="/account/login/" class="text-white hover:text-gray-400">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="h-40 w-auto bg-cover">
+        <img class="h-40 w-full object-cover brightness-50" src="/assets/images/notes/notes-14.jpg" alt="">
+    </div>
+
+    <main class="w-full max-w-6xl mx-auto px-4 flex-grow">
+        <div id="message-container" class="my-4"></div>
+        <div class="flex flex-col md:flex-row items-center mx-auto max-w-5xl p-4">
+            <!-- Form Section -->
+            <div class="flex flex-col items-center mx-auto md:w-1/2 p-4">
+                <h1 class="text-white text-3xl font-bold">Edit Post</h1>
+                <form id="form" class="flex flex-col items-center p-4 space-y-8 mb-10 w-full max-w-2xl">
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Title"
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                    <select
+                        id="subject"
+                        title="Choose a subject"
+                        aria-label="Choose a subject"
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:
+                        ring focus:ring-blue-300"
+                     >
+                        <option value="Frameworks">Frameworks</option>
+                        <option value="Agency 2">Agency 2</option>
+                        <option value="Exam Project 2">Exam Project 2</option>
+                        <option value="Portfolio 2">Portfolio 2</option>
+                    </select>
+                    <textarea
+                        id="content"
+                        placeholder="Content"
+                        class="w-full h-32 border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    ></textarea>
+                    <input
+                        type="text"
+                        id="image"
+                        placeholder="Image URL"
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                    <input
+                        type="text"
+                        id="link"
+                        placeholder="Notion Link"
+                        class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                    <button
+                        id="submit-btn"
+                        class="px-4 mb-8 w-full py-2 bg-blue-700 text-white font-bold rounded hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-300"
+                    >
+                        Save Changes
+                    </button>
+                </form>
+            </div>
+    
+            <!-- Preview Section -->
+            <div id="preview-container" class="md:w-1/2 p-4"></div>
+        </div>
+    </main>
+
+    <footer class="font-extralight flex flex-col content-center items-center p-20 bg-gray-950 text-white text-center justify-center">
+        <p class="p-2">Notes from class written and shared in Notion by Anette</p>
+        <p class="italic p-2">Anette &copy; 2025</p>
+        <p class="p-2">This page is made by students for students at Noroff</p>
+    </footer>
+    <style>
+        #message-container {
+            position: relative;
+            z-index: 10;
+            margin: 1rem 0;
+        }
+        .message {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>           
+</body>
+</html>
