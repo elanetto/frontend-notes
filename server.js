@@ -225,7 +225,7 @@ app.get("/notes", async (req, res) => {
 app.post("/notes", authenticateToken, async (req, res) => {
   const { title, content, image, link, user_id, subject } = req.body;
 
-  console.log("Request body on server:", { title, content, image, link, user_id, subject, date });
+  console.log("Request body on server:", { title, content, image, link, user_id, subject });
 
   if (!title || !content || !image || !link || !user_id || !subject) {
     return res.status(400).json({ error: "Missing required fields" });
