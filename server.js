@@ -237,7 +237,7 @@ app.post("/notes", authenticateToken, async (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?);
     `;
 
-    const [results] = await connection.query(query, [title, content, image, link, user_id, subject, date]);
+    const [results] = await connection.query(query, [title, content, image, link, user_id, subject]);
 
     res.status(201).json({
       id: results.insertId,
@@ -301,7 +301,7 @@ app.put("/notes/:id", authenticateToken, async (req, res) => {
     const userId = req.user.id;
     const query = `
       UPDATE notes
-      SET title = ?, content = ?, image = ?, link = ?, subject = ?, date = ?
+      SET title = ?, content = ?, image = ?, link = ?, subject = ?
       WHERE id = ? AND user_id = ?;
     `;
 
