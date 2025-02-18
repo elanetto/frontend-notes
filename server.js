@@ -291,9 +291,9 @@ app.get("/notes/:id", async (req, res) => {
 
 app.put("/notes/:id", authenticateToken, async (req, res) => {
   const noteId = req.params.id;
-  const { title, content, image, link, subject, date } = req.body;
+  const { title, content, image, link, } = req.body;
 
-  if (!title || !content || !image || !link || !subject || !date) {
+  if (!title || !content || !image || !link) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
@@ -301,7 +301,7 @@ app.put("/notes/:id", authenticateToken, async (req, res) => {
     const userId = req.user.id;
     const query = `
       UPDATE notes
-      SET title = ?, content = ?, image = ?, link = ?, subject = ?
+      SET title = ?, content = ?, image = ?, link = ?
       WHERE id = ? AND user_id = ?;
     `;
 
