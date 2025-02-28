@@ -147,6 +147,16 @@ h1, h2 {
     align-self: flex-end;
 }
 
+.yellow-link {
+    color: #F7DC6F;
+    cursor: pointer;
+}
+
+.yellow-link:hover {
+    color: #c7a000;
+    font-weight: bold;
+}
+
 input[type="text"], textarea[type="text"] {
     border-radius: 4px;
     padding: 0.5rem;
