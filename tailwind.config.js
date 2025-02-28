@@ -1,23 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./account/**/*.html",
-    "./post/**/*.html",
-    "./src/**/*.js",
-    "./src/**/*.js",
-    "./src/**/*.css"
-  ],  
+    "./public/**/*.html",
+    "./public/js/**/*.js",
+    "./public/**/*.js",
+  ],
   theme: {
-    extend: {
-      colors: {
-      },
-      fontFamily: {
-        // mono: ['ui-monospace', 'SFMono-Regular'],
-        // roboto: ["Roboto", "sans-serif"],
-        // bebas: ["Bebas Neue", "sans-serif"],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 }

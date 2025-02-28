@@ -9,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // If logged in, show "Account Page"
         navList.innerHTML = `
             <li class="mr-4">
+                <a href="/appreciate/about/" class="text-yellow-500 yellow-link hover:text-gray-400">
+                    👏 Show Appreciation 👏
+                </a>
+            </li>
+            <li class="mr-4">
                 <a href="/account/account/" class="text-white hover:text-gray-400">
                     Account Page
                 </a>
@@ -22,6 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         // If not logged in, show "Login"
         navList.innerHTML = `
+            <li class="mr-4">
+                <a href="/appreciate/about/" class="text-yellow-500 yellow-link hover:text-gray-400 hover:font-bold">
+                    👏 Show Appreciation 👏
+                </a>
+            </li>
             <li class="mr-4">
                 <a href="/account/login/" class="text-white hover:text-gray-400">
                     Login
