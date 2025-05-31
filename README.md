@@ -213,7 +213,7 @@ Response:
   }
 ]
 ```
-PS: 'image' here refers to the image saved to the note. Name and avatar refers to the user who made the note.
+PS: 'image' here refers to the image saved to represent the note in the note card. Name and avatar refers to the user who made the note.
 
 ### Get a Note by ID
 - Endpoint: /notes/:id
