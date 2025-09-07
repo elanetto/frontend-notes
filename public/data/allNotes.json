@@ -1,0 +1,233 @@
+[
+  {
+    "id": 26,
+    "title": "React Recap",
+    "content": "Create a new repo and install React. Set up Router in Main.jsx. Set up and use Layout component. Set up and use store.js (zustand). Create a functional form (Hook).",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/note-list-react.png",
+    "link": "https://husky-koi-ce1.notion.site/Friday-28th-of-February-2025-1029e712ff82806eb46bd63bd21294f7",
+    "subject": "Frameworks",
+    "date": "2025-02-28T07:43:54.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 25,
+    "title": "Deploy, links & img",
+    "content": "REACT: Deploy, images, Links & API + CSS Battle!",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/doggo.png",
+    "link": "https://husky-koi-ce1.notion.site/Thursday-27th-of-February-2025-2394fbb6d3564b23b255396ef3e03f63",
+    "subject": "Frameworks",
+    "date": "2025-02-27T10:51:32.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 24,
+    "title": "JS Cart + React Forms",
+    "content": "Creating functions for shopping carts with JavaScript. We also created React Forms using TypeScript at the end of class.",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/js-cart-function.png",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-26th-of-Feb-1029e712ff828057be14ca5d4c4d2954",
+    "subject": "Frameworks",
+    "date": "2025-02-26T08:39:54.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 23,
+    "title": "TypeScript: Start here!",
+    "content": "Learning about types in TypeScript",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/typescript.png",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-25th-of-February-2025-1029e712ff82807093aad6a1108b5a63",
+    "subject": "Frameworks",
+    "date": "2025-02-25T09:56:28.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 22,
+    "title": "React: Rainy Days API",
+    "content": "Create a page with products, a single product page, and a button to add to cart. Using Noroff API for Rainy Days.",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/rainy-days-01.png",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-19th-of-February-1029e712ff828039adcdfff59393296a",
+    "subject": "Frameworks",
+    "date": "2025-02-19T11:01:44.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 21,
+    "title": "React: State Management",
+    "content": "React: Create TODO-list. Use state management “Zustand”",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/zustand.png",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-18th-of-February-1029e712ff8280c0bc9ac07d57b6172e",
+    "subject": "Frameworks",
+    "date": "2025-02-18T12:06:36.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 20,
+    "title": "React: Edit a repo",
+    "content": "Go through a Vite, React & Tailwind project and make it better",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/example-bad-project.png",
+    "link": "https://husky-koi-ce1.notion.site/Friday-14th-of-February-2025-1029e712ff82804a91ebf84d7fe8fef1",
+    "subject": "Frameworks",
+    "date": "2025-02-14T12:05:15.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 19,
+    "title": "Flappy Bird (JS)",
+    "content": "Create a simple Flappy Bird game",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/flappy_bird.png",
+    "link": "https://husky-koi-ce1.notion.site/Thursday-13th-of-February-2025-3816c69a6d164b968999a770490f0271",
+    "subject": "Frameworks",
+    "date": "2025-02-13T12:02:25.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 18,
+    "title": "React: Pokédex",
+    "content": "React Pokédex: Layout, Routing, Cards, Filter Search. We are using a free Pokémon API.",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/Ivysaur.png",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-12th-of-February-2025-1029e712ff8280d890cac82c11209346",
+    "subject": "Frameworks",
+    "date": "2025-02-12T11:59:40.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 17,
+    "title": "Components & Routes",
+    "content": "React: How NOT to link, Using Components and setting up Routes",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/react-page.png",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-11th-of-February-2025-1029e712ff828047bd24dce22979028d",
+    "subject": "Frameworks",
+    "date": "2025-02-11T11:54:27.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 16,
+    "title": "JavaScript Loops",
+    "content": "JavaScript tasks: Focusing on Loops",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/double-value-loop.png",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-4th-of-February-1029e712ff8280c2a50df609bbb05f60",
+    "subject": "Frameworks",
+    "date": "2025-02-04T11:49:58.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 15,
+    "title": "FizzBuzz (JS)",
+    "content": "Grades, FizzBuzz and prime numbers (JS)",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/fizzbuzz-code.png",
+    "link": "https://husky-koi-ce1.notion.site/Thursday-30th-of-January-1029e712ff8280ea8ce9c0dd304518ce",
+    "subject": "Frameworks",
+    "date": "2025-01-30T11:47:14.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 13,
+    "title": "React: TODO-list",
+    "content": "Use React to manipulate states: Adding, Edit and Deleting. \nTO-DO list with check-marks and delete button.",
+    "image": "https://raw.githubusercontent.com/elanetto/images/refs/heads/main/img/notes/notes-16.png",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-29th-of-January-1029e712ff8280e6966afefd156bd543?pvs=4",
+    "subject": "Frameworks",
+    "date": "2025-01-28T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 12,
+    "title": "React: Introduction",
+    "content": "Introduction to React and React Components",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-15.png",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-28th-of-January-1029e712ff828089af1edfefd44c4f2e",
+    "subject": "Frameworks",
+    "date": "2025-01-27T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 7,
+    "title": "Json Web Token",
+    "content": "Make a login secure with JWT (Json Web Token)",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-14.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Friday-17th-of-January-c260afbb8d0243c99c516263c8ad1f21?pvs=4",
+    "subject": "Development Platforms",
+    "date": "2025-01-16T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 6,
+    "title": "SQL: Blog",
+    "content": "Setting up a blog site using our SQL database",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-13.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Thursday-16th-of-Jan-1029e712ff828087a324c9c276ecd6d0",
+    "subject": "Development Platforms",
+    "date": "2025-01-15T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 5,
+    "title": "SQL: .env",
+    "content": "SQL Database in VSC, adding .env file and creating a new table to use.",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-02.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-15th-of-Jan-1029e712ff828053b21ce29da4d51570",
+    "subject": "Development Platforms",
+    "date": "2025-01-14T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 4,
+    "title": "Connect SQL to VSC",
+    "content": "Connecting SQL database to our own code in VSC.",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-07.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-14th-of-January-1029e712ff828064b683f97993747dea",
+    "subject": "Development Platforms",
+    "date": "2025-01-13T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 3,
+    "title": "SQL: Introduction",
+    "content": "SQL: Use Free SQL Databases to learn to use SQL.",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-09.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Friday-10-1-98fda3618e85416397d2baacb871539f",
+    "subject": "Development Platforms",
+    "date": "2025-01-09T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 2,
+    "title": "Program your own API",
+    "content": "Create your own API using code.",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/notes-03.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Wednesday-8-1-1029e712ff82803a9754c0951c4fff30",
+    "subject": "Development Platforms",
+    "date": "2025-01-07T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  },
+  {
+    "id": 1,
+    "title": "JavaScript & terminal",
+    "content": "Online class because of snowstorm. Review: Terminal, variables in javascript, functions, loops.",
+    "image": "https://raw.githubusercontent.com/elanetto/frontend-notes/refs/heads/main/assets/images/notes/snowday.jpg",
+    "link": "https://husky-koi-ce1.notion.site/Tuesday-7-1-1029e712ff8280419241d4cf000124c0",
+    "subject": "Development Platforms",
+    "date": "2025-01-06T23:00:00.000Z",
+    "name": "Anette",
+    "avatar": "https://anettetherese.no/Notes/assets/images/avatar_anette_300x300.png"
+  }
+]

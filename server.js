@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -72,7 +72,7 @@ app.get("/profile", authenticateToken, async (req, res) => {
   try {
     const [results] = await connection.query(
       "SELECT name, email, avatar FROM user WHERE id = ?",
-      [userId]
+      [userId],
     );
 
     if (results.length === 0) {
@@ -98,7 +98,10 @@ app.post("/login", async (req, res) => {
   }
 
   try {
-    const [rows] = await connection.query("SELECT * FROM user WHERE email = ?", [email]);
+    const [rows] = await connection.query(
+      "SELECT * FROM user WHERE email = ?",
+      [email],
+    );
 
     if (rows.length === 0) {
       return res.status(401).json({ error: "Invalid email or password" });
@@ -114,7 +117,7 @@ app.post("/login", async (req, res) => {
     const accessToken = jwt.sign(
       { id: user.id, email: user.email, name: user.name },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "1h" }
+      { expiresIn: "1h" },
     );
 
     res.status(200).json({
@@ -148,7 +151,11 @@ app.post("/register", async (req, res) => {
       VALUES (?, ?, ?);
     `;
 
-    const [results] = await connection.query(query, [name, email, hashedPassword]);
+    const [results] = await connection.query(query, [
+      name,
+      email,
+      hashedPassword,
+    ]);
 
     res.status(201).json({
       message: "User registered successfully",
@@ -167,35 +174,16 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// app.get("/notes", async (req, res) => {
-//   const [result] = await connection.query(`
-//     SELECT 
-//       notes.id,
-//       notes.title, 
-//       notes.content, 
-//       notes.image, 
-//       notes.link, 
-//       notes.subject,
-//       notes.date,
-//       user.name, 
-//       user.avatar
-//     FROM notes
-//     JOIN user ON notes.user_id = user.id;
-//   `);
-//   res.send(result);
-// });
-
 app.get("/notes", async (req, res) => {
   try {
-    const { sort } = req.query; // Read the 'sort' query parameter
+    const { sort } = req.query;
 
-    let orderBy = "date DESC"; // Default sorting: Newest first
+    let orderBy = "date DESC";
 
     if (sort === "asc") {
-      orderBy = "date ASC"; // Oldest first if 'asc' is provided
+      orderBy = "date ASC";
     }
 
-    // Query the database with sorting
     const query = `
       SELECT 
         notes.id,
@@ -221,11 +209,17 @@ app.get("/notes", async (req, res) => {
   }
 });
 
-
 app.post("/notes", authenticateToken, async (req, res) => {
   const { title, content, image, link, user_id, subject } = req.body;
 
-  console.log("Request body on server:", { title, content, image, link, user_id, subject });
+  console.log("Request body on server:", {
+    title,
+    content,
+    image,
+    link,
+    user_id,
+    subject,
+  });
 
   if (!title || !content || !image || !link || !user_id || !subject) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -237,7 +231,14 @@ app.post("/notes", authenticateToken, async (req, res) => {
       VALUES (?, ?, ?, ?, ?, ?);
     `;
 
-    const [results] = await connection.query(query, [title, content, image, link, user_id, subject]);
+    const [results] = await connection.query(query, [
+      title,
+      content,
+      image,
+      link,
+      user_id,
+      subject,
+    ]);
 
     res.status(201).json({
       id: results.insertId,
@@ -248,7 +249,7 @@ app.post("/notes", authenticateToken, async (req, res) => {
       user_id,
       subject,
       date: new Date().toISOString(),
-    });    
+    });
   } catch (err) {
     console.error("Error creating post:", err.message);
     res.status(500).json({ error: "Internal server error" });
@@ -275,7 +276,7 @@ app.get("/notes/:id", async (req, res) => {
       JOIN user ON notes.user_id = user.id 
       WHERE notes.id = ?;
       `,
-      [noteId]
+      [noteId],
     );
 
     if (result.length === 0) {
@@ -291,7 +292,7 @@ app.get("/notes/:id", async (req, res) => {
 
 app.put("/notes/:id", authenticateToken, async (req, res) => {
   const noteId = req.params.id;
-  const { title, content, image, link, } = req.body;
+  const { title, content, image, link } = req.body;
 
   if (!title || !content || !image || !link) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -305,10 +306,22 @@ app.put("/notes/:id", authenticateToken, async (req, res) => {
       WHERE id = ? AND user_id = ?;
     `;
 
-    const [result] = await connection.query(query, [title, content, image, link, noteId, userId]);
+    const [result] = await connection.query(query, [
+      title,
+      content,
+      image,
+      link,
+      noteId,
+      userId,
+    ]);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Note not found or you do not have permission to edit this note" });
+      return res
+        .status(404)
+        .json({
+          error:
+            "Note not found or you do not have permission to edit this note",
+        });
     }
 
     res.status(200).json({ message: "Note updated successfully" });
@@ -327,7 +340,12 @@ app.delete("/notes/:id", authenticateToken, async (req, res) => {
     const [result] = await connection.query(query, [noteId, userId]);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Note not found or you do not have permission to delete this note" });
+      return res
+        .status(404)
+        .json({
+          error:
+            "Note not found or you do not have permission to delete this note",
+        });
     }
 
     res.status(200).json({ message: "Note deleted successfully" });
